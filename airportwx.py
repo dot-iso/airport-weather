@@ -3,7 +3,10 @@ import sys
 import urllib3
 from bs4 import BeautifulSoup
 
-def main(airport):
+# Arguments
+airports = sys.argv
+
+def get_weather(airport):
 	# Specify URL
 	airport_page = 'http://www.airnav.com/airport/' + airport
 
@@ -19,7 +22,8 @@ def main(airport):
 	find = soup.find(string="METAR").find_next('tr').find_next('table').find_next('tr').text
 
 	# Output the METAR
-	print(find)
+	print(find.strip())
 
-if __name__ == "__main__":
-	main(sys.argv[1])
+# Loop through arguments
+for airport in airports[1:]:
+	get_weather(airport)
