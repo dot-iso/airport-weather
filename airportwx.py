@@ -14,9 +14,11 @@ def main(airport):
 	# Parse
 	soup = BeautifulSoup(page.data, 'html.parser')
 
+	# Find the METAR out of the HTML
 	html_string = 'body > table:nth-child(8)'
 	find = soup.find(string="METAR").find_next('tr').find_next('table').find_next('tr').text
 
+	# Output the METAR
 	print(find)
 
 if __name__ == "__main__":
